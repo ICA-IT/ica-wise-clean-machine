@@ -1,0 +1,29 @@
+[Package]
+version: 1
+depends: 
+incremental: False
+
+[Product]
+type: localboot
+id: ica-wise-clean-machine
+name: ica-wise-clean-machine
+description: Please ad a valuable description.
+advice: 
+version: 1.0
+priority: 0
+licenseRequired: False
+productClasses: 
+setupScript: 
+uninstallScript: 
+updateScript: 
+alwaysScript: 
+onceScript: 
+customScript: 
+userLoginScript: 
+
+[Changelog]
+ica-wise-clean-machine (1.0-1) stable; urgency=low
+
+Project created with opsi Package Builder 8.2.2
+
+ -- John Kuras <jkuras@islandchristianacademy.com>  Tue, 06 Mar 2018 21:52:43 +0000

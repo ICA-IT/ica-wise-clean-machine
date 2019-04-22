@@ -1,0 +1,76 @@
+; Copyright (c) uib gmbh (www.uib.de)
+; This sourcecode is owned by uib
+; and published under the Terms of the General Public License.
+; credits: http://www.opsi.org/en/credits/
+
+[Actions]
+requiredWinstVersion >= "4.11.4.6"
+ScriptErrorMessages=off
+
+DefVar $MsiId$
+DefVar $UninstallProgram$
+DefVar $LogDir$
+DefVar $ProductId$  
+DefVar $MinimumSpace$
+DefVar $InstallDir$
+DefVar $ExitCode$
+DefVar $LicenseRequired$
+DefVar $LicenseKey$
+DefVar $LicensePool$
+DefVar $myProperty$
+DefVar $progname$
+DefVar $progname2$
+DefVar $fqprogname$
+DefVar $fqprogname2$
+DefVar $WinVer$
+DefVar $WinSysType$
+DefVar $WinTypeExt$
+Set $WinVer$ = GetMsVersionInfo
+Set $WinSysType$ = GetSystemType
+
+Set $LogDir$ = "%opsiLogDir%"
+
+; ----------------------------------------------------------------
+; - Please edit the following values                             -
+; ----------------------------------------------------------------
+;$ProductId$ should be the name of the product in opsi
+; therefore please: only lower letters, no umlauts, 
+; no white space use '-' as a seperator
+Set $ProductId$       = "ica-wise-clean-machine"
+Set $MinimumSpace$    = "1 MB"
+; the path were we find the product after the installation
+Set $InstallDir$      = "%ProgramFiles32Dir%\wise\"
+;Set $InstallDir$      = "c:\Program Files\wise\"
+; $progname$ is the location of the wise disk cleaner
+Set $progname$   = "Wise Disk Cleaner\WiseDiskCleaner.exe"
+; $progname2$ is the location of the wise registry cleaner
+Set $progname2$   = "Wise Registry Cleaner\WiseRegCleaner.exe"
+
+Set $LicenseRequired$ = "false"
+Set $LicensePool$     = "p_" + $ProductId$
+; ----------------------------------------------------------------
+
+Set $WinTypeExt$ = "x64"
+if ($WinSysType$ = "x86 System")
+    Set $WinTypeExt$ = "x86"
+    Set $InstallDir$ = "%ProgramFilesDir%\wise\"
+endif   
+
+; set the fully qualified program names
+Set $fqprogname$ = $InstallDir$ + $progname$
+Set $fqprogname2$ = $InstallDir$ + $progname2$
+
+	comment "Show product picture"
+	ShowBitmap "%ScriptPath%\" + $ProductId$ + ".png" $ProductId$
+	
+	Message "Running " + $ProductId$ + " ..." + $WinTypeExt$
+	
+	comment "Start cleanup programs "
+
+	ChangeDirectory "%SCRIPTPATH%"
+	Winbatch_install
+		
+
+[Winbatch_install]
+"$fqprogname$" -a -safe
+"$fqprogname2$" -a -safe

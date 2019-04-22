@@ -1,0 +1,40 @@
+[Package]
+version: 1
+depends: 
+
+[Product]
+type: localboot
+id: ica-wise-clean-machine
+name: ica-wise-clean-machine
+description: Clean computer using the wise disk and registry cleaning tools.
+advice: 
+version: 1.0
+priority: 0
+licenseRequired: False
+productClasses: 
+setupScript: setup32.opsiscript
+uninstallScript: uninstall32.opsiscript
+updateScript: 
+alwaysScript: 
+onceScript: 
+customScript: 
+userLoginScript: 
+
+[ProductDependency]
+action: setup
+requiredProduct: ica-wise-registry-cleaner
+requiredStatus: installed
+requirementType: before
+
+[ProductDependency]
+action: setup
+requiredProduct: ica-wise-disk-cleaner
+requiredStatus: installed
+requirementType: before
+
+[Changelog]
+ica-wise-clean-machine (1.0-1) stable; urgency=low
+
+Project created with opsi Package Builder 8.2.2
+
+ -- John Kuras <jkuras@islandchristianacademy.com>  Tue, 06 Mar 2018 21:52:43 +0000

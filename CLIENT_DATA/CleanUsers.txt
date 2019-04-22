@@ -1,0 +1,6 @@
+net user teacher /del
+net user student /del
+wmic /node:localhost path win32_UserProfile where LocalPath="c:\\users\\teacher" Delete
+wmic /node:localhost path win32_UserProfile where LocalPath="c:\\users\\student" Delete
+net user teacher x11 /add
+net user student student /add
